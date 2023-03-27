@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\JobRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,11 +13,33 @@ class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
 
-    public function index(JobRepository $jobRepository, Request $request): Response
+    public function index(JobRepository $jobRepository,  PaginatorInterface $paginator, Request $request): Response
     {
 
+        $pagination = $paginator->paginate(
+            $jobRepository->findAll(), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            15 /*limit per page*/
+        );
+
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'jobs' => $pagination,
         ]);
     }
+
+    // #[Route('/recipes', name: 'recipes')] 
+
+    // public function list(JobRepository $jobRepository, PaginatorInterface $paginator, Request $request): Response
+    // {
+    //     $pagination = $paginator->paginate(
+    //         $jobRepository->findAll(), /* query NOT result */
+    //         $request->query->getInt('page', 1), /*page number*/
+    //         15 /*limit per page*/
+    //     );
+
+    //     return $this->render('home/index.html.twig', [
+    //         'pagination' => $pagination,
+    //     ]);
+    // }
+
 }
