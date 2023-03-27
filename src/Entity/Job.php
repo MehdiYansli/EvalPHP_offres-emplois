@@ -46,9 +46,13 @@ class Job
     #[ORM\OneToMany(mappedBy: 'job_id', targetEntity: Apply::class)]
     private Collection $applies;
 
+    #[ORM\OneToMany(mappedBy: 'job_id', targetEntity: Apply::class)]
+    private Collection $appliesJob;
+
     public function __construct()
     {
         $this->applies = new ArrayCollection();
+        $this->appliesJob = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -172,25 +176,34 @@ class Job
         return $this->applies;
     }
 
-    public function addApply(Apply $apply): self
+    /**
+     * @return Collection<int, Apply>
+     */
+    public function getAppliesJob(): Collection
     {
-        if (!$this->applies->contains($apply)) {
-            $this->applies->add($apply);
-            $apply->setJobId($this);
+        return $this->appliesJob;
+    }
+
+    public function addAppliesJob(Apply $appliesJob): self
+    {
+        if (!$this->appliesJob->contains($appliesJob)) {
+            $this->appliesJob->add($appliesJob);
+            $appliesJob->setJobId($this);
         }
 
         return $this;
     }
 
-    public function removeApply(Apply $apply): self
+    public function removeAppliesJob(Apply $appliesJob): self
     {
-        if ($this->applies->removeElement($apply)) {
+        if ($this->appliesJob->removeElement($appliesJob)) {
             // set the owning side to null (unless already changed)
-            if ($apply->getJobId() === $this) {
-                $apply->setJobId(null);
+            if ($appliesJob->getJobId() === $this) {
+                $appliesJob->setJobId(null);
             }
         }
 
         return $this;
     }
+
 }

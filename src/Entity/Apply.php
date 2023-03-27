@@ -31,17 +31,12 @@ class Apply
     #[ORM\Column]
     private ?\DateTimeImmutable $sendAt = null;
 
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'applies')]
-    private Collection $user_id;
-
-    #[ORM\ManyToOne(inversedBy: 'applies')]
+    #[ORM\ManyToOne(inversedBy: 'appliesJob')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Job $job_id = null;
+    private ?User $user_id = null;
 
-    public function __construct()
-    {
-        $this->user_id = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'appliesJob')]
+    private ?Job $job_id = null;
 
     public function getId(): ?int
     {
@@ -108,26 +103,14 @@ class Apply
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUserId(): Collection
+    public function getUserId(): ?User
     {
         return $this->user_id;
     }
 
-    public function addUserId(User $userId): self
+    public function setUserId(?User $user_id): self
     {
-        if (!$this->user_id->contains($userId)) {
-            $this->user_id->add($userId);
-        }
-
-        return $this;
-    }
-
-    public function removeUserId(User $userId): self
-    {
-        $this->user_id->removeElement($userId);
+        $this->user_id = $user_id;
 
         return $this;
     }
