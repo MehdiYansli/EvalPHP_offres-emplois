@@ -22,7 +22,7 @@
 						<p class="card-text">
 							<small class="text-body-secondary">Posté le {{ job.sendAt|date('d-m-Y') }}</small>
 						</p>
-						<button type="button" class="btn btn-primary">Voir l'offre</button>
+						<a href="{{ path('app_job', {'id': job.id}) }}" class="btn btn-primary">Voir l'offre</a>
 					</div>
 				</div>
 			</div>

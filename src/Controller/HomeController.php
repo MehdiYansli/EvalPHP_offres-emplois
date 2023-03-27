@@ -27,19 +27,4 @@ class HomeController extends AbstractController
         ]);
     }
 
-    // #[Route('/recipes', name: 'recipes')] 
-
-    // public function list(JobRepository $jobRepository, PaginatorInterface $paginator, Request $request): Response
-    // {
-    //     $pagination = $paginator->paginate(
-    //         $jobRepository->findAll(), /* query NOT result */
-    //         $request->query->getInt('page', 1), /*page number*/
-    //         15 /*limit per page*/
-    //     );
-
-    //     return $this->render('home/index.html.twig', [
-    //         'pagination' => $pagination,
-    //     ]);
-    // }
-
 }
