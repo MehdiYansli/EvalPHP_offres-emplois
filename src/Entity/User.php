@@ -45,6 +45,11 @@ class User
         $this->appliesJob = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->username;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

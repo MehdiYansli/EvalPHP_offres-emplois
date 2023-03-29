@@ -32,7 +32,7 @@ class Apply
     private ?\DateTimeImmutable $sendAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'appliesJob')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $user_id = null;
 
     #[ORM\ManyToOne(inversedBy: 'appliesJob')]

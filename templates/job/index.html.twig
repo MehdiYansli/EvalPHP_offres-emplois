@@ -4,14 +4,75 @@
 {% endblock %}
 
 {% block body %}
-	<main class="wrapper d-flex flex-column align-items-center">
-		
-			<div class="card w-75">
-				<div class="card-body">
-					<h5 class="card-title">{{ job.title }}</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="{{ path('app_home')}}" class="btn btn-primary">Retour</a>
+	<main class="wrapper d-flex flex-column align-items-center justify-content-center">
+
+		<div class="card d-flex align-items-center w-75">
+			<div class="card-body w-75">
+				<div class="car_body_image my-4 float-end">
+					<img width="100" src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c0/Logo_P%C3%B4le_Emploi_2008.svg/2560px-Logo_P%C3%B4le_Emploi_2008.svg.png" alt="">
+				</div>
+
+				<div class="card_body_text">
+
+					<h3 class="card-title my-4">{{ job.title }}</h3>
+					<p class="card-text">
+						{{job.type}}
+						-
+						{{job.department}}
+						-
+						{{job.city}}
+					</p>
+					<p class="card-text my-5">{{ job.description }}{{ job.description }}
+						<br>
+						{{ job.description }}
+					</p>
+					<p class="card-text text-secondary">
+						<small class="text-body-secondary">Posté le
+							{{ job.sendAt|date('d-m-Y') }}</small>
+					</p>
+					<hr>
+					<div class="infos my-5">
+						<h5 class="mb-2">Informations:</h5>
+						<ul class="list-unstyled" style="width:150px;">
+							<li>
+								<i class="fa-solid fa-building" style="color: #54B4D3;"></i>&nbsp;&nbsp;&nbsp;
+								<span>{{ job.type }}</span>
+							</li>
+							<li>
+								<i class="fa-regular fa-clock" style="color: #54B4D3;"></i>&nbsp;&nbsp;
+								<span>{{ job.duration }}</span>
+							</li>
+							<li>
+								<i class="fa-solid fa-euro-sign" style="color: #54B4D3;"></i>&nbsp;&nbsp;&nbsp;
+								<span>{{ job.salary }} brut</span>
+							</li>
+						</ul>
+					</div>
+					<div class="text-end">
+						<a href="{{ path('app_home')}}" class="btn btn-primary">Retour</a>
+					</div>
 				</div>
 			</div>
+		</div>
+		{{ form_start(form, { 'attr': {'class': 'applyForm w-75 mt-5'} }) }}
+		<div class="card d-flex align-items-center ">
+			<h3 class="pt-4">Envoyez votre candidature</h3>
+			<div class="card-body w-75">
+				<div class="mb-3">
+					{{ form_widget(form.last_name) }}
+				</div>
+				<div class="mb-3">
+					{{ form_widget(form.first_name) }}
+				</div>
+				<div class="mb-3">
+					{{ form_widget(form.email) }}
+				</div>
+				<div class="mb-3">
+					{{ form_widget(form.message) }}
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary mb-4">ENVOYER</button>
+		</div>
+		{{ form_end(form) }}
 	</main>
 {% endblock %}

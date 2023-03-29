@@ -17,7 +17,8 @@ class HomeController extends AbstractController
     {
 
         $pagination = $paginator->paginate(
-            $jobRepository->findAll(), /* query NOT result */
+            $jobRepository->findBy([], ['sendAt' => 'DESC']),
+            // $jobRepository->findAll(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             15 /*limit per page*/
         );
