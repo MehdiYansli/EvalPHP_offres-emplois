@@ -11,10 +11,13 @@
 				<input type="search" class="form-control" placeholder="Search..." aria-label="Search">
 			</form>
 		</div>
-
+		{{form_start(formSort)}}
 		<div class="btn-group d-flex justify-content-around m-3">
-			<button type="button" class="btn btn-primary dropdown-toggle mx-2" data-bs-toggle="dropdown" aria-expanded="false">
-				Type de contrat
+
+			{{form_widget(formSort.type)}}
+			{{ form_widget(formSort.department)}}
+			{# <button type="button" class="btn btn-primary dropdown-toggle mx-2" data-bs-toggle="dropdown" aria-expanded="false">
+			Type de contrat
 			</button>
 			<ul class="dropdown-menu">
 				<li>
@@ -32,9 +35,9 @@
 				<li>
 					<a class="dropdown-item" href="#">Stage</a>
 				</li>
-			</ul>
+			</ul> #}
 
-			<button type="button" class="btn btn-primary dropdown-toggle mx-2 rounded" data-bs-toggle="dropdown" aria-expanded="false">
+			{# <button type="button" class="btn btn-primary dropdown-toggle mx-2 rounded" data-bs-toggle="dropdown" aria-expanded="false">
 				Département
 			</button>
 			<ul class="dropdown-menu overflow-auto" style="height:200px;">
@@ -45,66 +48,73 @@
 							{{i}}</a>
 					</li>
 				{% endfor %}
-			</ul>
+			</ul> #}
 
-			<button type="button" class="btn btn-primary rounded"> {{ knp_pagination_sortable(jobs, '', 'sendAt') }} Date  <span><i class="fa-solid fa-arrow-right-arrow-left" style="color: #ffffff; transform: rotate(90deg);"></i></span></button>
-
+			<button type="button" class="dateSort btn btn-white text-primary border-primary rounded mx-2" href="">{{ knp_pagination_sortable(jobs, 'Date', 'r.sendAt') }}
+			</button>
 
 		</div>
+		{{form_end(formSort)}}
 
-		</section>
 
-		<main class="allJobs wrapper d-flex flex-column align-items-center">
-			{% for job in jobs %}
-				<div class="jobOffer card w-75 my-4">
-					<div class="card-body d-flex align-items-center">
-						<div class="car_body_image mx-5">
-							<img width="100" src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c0/Logo_P%C3%B4le_Emploi_2008.svg/2560px-Logo_P%C3%B4le_Emploi_2008.svg.png" alt="">
-						</div>
-						<div class="card_body_text w-100">
-							<h5 class="card-title">{{ job.title }}</h5>
+	</section>
+
+	<main class="allJobs wrapper d-flex flex-column align-items-center">
+		{% for job in jobs %}
+			<div class="jobOffer card w-75 my-4">
+				<div class="card-body d-flex align-items-center">
+					<div class="car_body_image mx-5">
+						<img width="100" src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c0/Logo_P%C3%B4le_Emploi_2008.svg/2560px-Logo_P%C3%B4le_Emploi_2008.svg.png" alt="">
+					</div>
+					<div class="card_body_text w-100">
+						<h5 class="card-title">{{ job.title }}</h5>
+						<p class="card-text">
+							<small class="text-body-secondary">{{job.type}}
+								-
+								{{job.department}}
+								-
+								{{job.city}}</small>
+						</p>
+						<p class="card-text w-75">{{ job.description }}</p>
+						<div class="d-flex justify-content-between">
 							<p class="card-text">
-								<small class="text-body-secondary">{{job.type}}
-									-
-									{{job.department}}
-									-
-									{{job.city}}</small>
+								<small class="text-body-secondary">Posté le
+									{{ job.sendAt|date('d-m-Y') }}</small>
 							</p>
-							<p class="card-text w-75">{{ job.description }}</p>
-							<div class="d-flex justify-content-between">
-								<p class="card-text">
-									<small class="text-body-secondary">Posté le
-										{{ job.sendAt|date('d-m-Y') }}</small>
-								</p>
-								<a href="{{ path('app_job', {'id': job.id}) }}" class="btn btn-primary">Voir l'offre</a>
-							</div>
+							<a href="{{ path('app_job', {'id': job.id}) }}" class="btn btn-primary">Voir l'offre</a>
 						</div>
 					</div>
 				</div>
-			{% endfor %}
-		</main>
+			</div>
+		{% endfor %}
+	</main>
 
-		<div class="navigation d-flex justify-content-center">
-			{{ knp_pagination_render(jobs) }}
-		</div>
+	<div class="navigation d-flex justify-content-center">
+		{{ knp_pagination_render(jobs) }}
+	</div>
 
-		<script>
+	<script>
 		const searchBar = document.querySelector('.form-control')
-		const jobsOffer = document.querySelectorAll('.jobOffer')
+const jobsOffer = document.querySelectorAll('.jobOffer')
 
-		searchBar.addEventListener('keyup', (e) => {
-			let getValue = searchBar.value.trim().toLowerCase();
+searchBar.addEventListener('keyup', (e) => {
+let getValue = searchBar.value.trim().toLowerCase();
 
-			if (getValue.length > 0) {
+if (getValue.length > 0) {
 
-			jobsOffer.forEach(function(card){
-				if (card.querySelector('h5').textContent.includes(getValue)) {
-					card.style.display = "flex"
-				} else {
-					card.style.display = "none"
-				} 
-			})
-			}
-		})
-		</script>
-	{% endblock %}
+jobsOffer.forEach(function (card) {
+if (card.querySelector('h5').textContent.includes(getValue)) {
+card.style.display = "flex"
+} else {
+card.style.display = "none"
+}
+})
+}
+})
+
+	const inputContrat = document.getElementById('job_sort_type');
+	inputContrat.addEventListener('change', function() {
+		document.querySelector('[name="job_sort"]').submit();
+	})
+	</script>
+{% endblock %}

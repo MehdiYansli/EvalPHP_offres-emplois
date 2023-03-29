@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Job;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Job>
@@ -39,6 +40,7 @@ class JobRepository extends ServiceEntityRepository
         }
     }
 
+    
 //    /**
 //     * @return Job[] Returns an array of Job objects
 //     */
@@ -53,6 +55,30 @@ class JobRepository extends ServiceEntityRepository
 //            ->getResult()
 //        ;
 //    }
+
+public function search($criteria)
+{
+     $qb = $this->createQueryBuilder('r');
+
+     if(!empty($criteria->type)) {
+         $qb
+             ->andWhere('r.type = :type')
+             ->setParameter('type', $criteria->type)
+         ;
+     }
+
+     if(!empty($criteria->department)) {
+         $qb
+             ->andWhere('r.department = :department')
+             ->setParameter('department', $criteria->department)
+         ;
+     }
+
+     $qb
+        ->orderBy('r.sendAt', 'DESC');
+
+    return $qb->getQuery();
+}
 
 //    public function findOneBySomeField($value): ?Job
 //    {
