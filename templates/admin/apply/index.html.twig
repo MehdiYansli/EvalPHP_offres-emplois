@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Apply index{% endblock %}
+
+{% block body %}
+    <h1>Apply index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>SendAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for apply in applies %}
+            <tr>
+                <td>{{ apply.id }}</td>
+                <td>{{ apply.firstName }}</td>
+                <td>{{ apply.lastName }}</td>
+                <td>{{ apply.email }}</td>
+                <td>{{ apply.message }}</td>
+                <td>{{ apply.sendAt ? apply.sendAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_apply_show', {'id': apply.id}) }}">show</a>
+                    <a href="{{ path('app_admin_apply_edit', {'id': apply.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_apply_new') }}">Create new</a>
+{% endblock %}

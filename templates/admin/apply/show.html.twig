@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Apply{% endblock %}
+
+{% block body %}
+    <h1>Apply</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ apply.id }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ apply.firstName }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ apply.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ apply.email }}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>{{ apply.message }}</td>
+            </tr>
+            <tr>
+                <th>SendAt</th>
+                <td>{{ apply.sendAt ? apply.sendAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_apply_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_apply_edit', {'id': apply.id}) }}">edit</a>
+
+    {{ include('admin/apply/_delete_form.html.twig') }}
+{% endblock %}
