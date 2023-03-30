@@ -34,7 +34,7 @@ class JobSortType extends AbstractType
                 'choices' => [
                         'CDI' => 'CDI',
                         'CDD' => 'CDD',
-                        'Intérime' => 'Intérime',
+                        'Intérim' => 'Intérim',
                         'Alternance' => 'Alternance',
                         'Stage' => 'Stage' ,
                 ],
@@ -52,7 +52,7 @@ class JobSortType extends AbstractType
     private function getDpts(): array
     {
         $dpts = [];
-        for($i=0; $i < 100; $i++) {
+        for($i=1; $i < 100; $i++) {
             $dpts["Département - $i"]= $i;
         }
         return $dpts;

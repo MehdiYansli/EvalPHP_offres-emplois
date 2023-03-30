@@ -45,9 +45,9 @@ class AppFixtures extends Fixture
                 ->setCity($faker->word())
                 ->setDescription($faker->paragraph())
                 ->setSendAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-3 months', 'now')))
-                ->setEndDate($faker->dateTime())
+                ->setEndDate($faker->dateTimeBetween('+3 months','+6 months'))
                 ->setSalary($faker->randomNumber(6, false))
-                ->setType($faker->randomElement(['CDI', 'CDD', 'Intérime', 'Alternance', 'Stage']))
+                ->setType($faker->randomElement(['CDI', 'CDD', 'Intérim', 'Alternance', 'Stage']))
                 ->setDuration($faker->randomNumber(2, false) . ' ' . $faker->randomElement(['mois', 'ans']));
             
             $manager->persist($job);

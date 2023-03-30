@@ -69,7 +69,7 @@
 			if (getValue.length > 0) {
 
 				jobsOffer.forEach(function (card) {
-					if (card.querySelector('h5').textContent.includes(getValue)) {
+					if (card.querySelector('h5').textContent.toLowerCase().includes(getValue)) {
 					card.style.display = "flex"
 					} else {
 					card.style.display = "none"

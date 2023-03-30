@@ -27,8 +27,8 @@
                 <td>{{ job.description }}</td>
             </tr>
             <tr>
-                <th>Posté le</th>
-                <td>{{ job.sendAt ? job.sendAt|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Postée le</th>
+                <td>{{ job.sendAt ? job.sendAt|date('d/m/Y') : '' }}</td>
             </tr>
             <tr>
                 <th>Salaire</th>

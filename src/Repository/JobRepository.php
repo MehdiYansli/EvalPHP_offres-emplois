@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use DateTime;
 use App\Entity\Job;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
@@ -59,26 +60,31 @@ class JobRepository extends ServiceEntityRepository
 
 public function search($criteria)
 {
-     $qb = $this->createQueryBuilder('r');
+    $dateNow = new DateTime('now');
+    $qb = $this->createQueryBuilder('r'); // SELECT * FROM Recipe r
+   
+    
+        if(!empty($criteria['type'])) {
+            $qb
+                ->andWhere('r.type = :type') // WHERE (AND)
+                ->setParameter('type', $criteria['type'])
+            ;
+        }
+    
+        if(!empty($criteria['department'])) {
+            $qb
+                ->andWhere('r.department = :department') // AND departement = :department
+                ->setParameter('department', $criteria['department'])
+            ;
+        }
+    
+        $qb
+           ->orderBy('r.sendAt', 'DESC')
 
-     if(!empty($criteria['type'])) {
-         $qb
-             ->andWhere('r.type = :type')
-             ->setParameter('type', $criteria['type'])
-         ;
-     }
-
-     if(!empty($criteria['department'])) {
-         $qb
-             ->andWhere('r.department = :department')
-             ->setParameter('department', $criteria['department'])
-         ;
-     }
-
-     $qb
-        ->orderBy('r.sendAt', 'DESC');
-
-    return $qb->getQuery();
+           ->andWhere('r.endDate > :endDate')
+           ->setParameter('endDate', $dateNow);
+    
+       return $qb->getQuery();
 }
 
 
