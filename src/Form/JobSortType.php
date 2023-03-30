@@ -16,7 +16,7 @@ class JobSortType extends AbstractType
         $builder
             ->add('department', ChoiceType::class, [                
                 'attr' => [
-                'class' => 'btn btn-primary dropdown-toggle mx-2 rounded',
+                'class' => 'btn btn-primary dropdown-toggle rounded',
             ],
                 'label' => 'Département',
                 'choices' => [
@@ -28,7 +28,7 @@ class JobSortType extends AbstractType
             // ->add('city')
             ->add('type', ChoiceType::class, [                
                 'attr' => [
-                'class' => 'btn btn-primary dropdown-toggle mx-2',
+                'class' => 'btn btn-primary dropdown-toggle',
             ],
                 'label' => 'Type de contrat',
                 'choices' => [
@@ -46,9 +46,7 @@ class JobSortType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-            'data_class' => Job::class,
-        ]);
+        $resolver->setDefaults([]);
     }
 
     private function getDpts(): array

@@ -56,21 +56,22 @@ class JobRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+
 public function search($criteria)
 {
      $qb = $this->createQueryBuilder('r');
 
-     if(!empty($criteria->type)) {
+     if(!empty($criteria['type'])) {
          $qb
              ->andWhere('r.type = :type')
-             ->setParameter('type', $criteria->type)
+             ->setParameter('type', $criteria['type'])
          ;
      }
 
-     if(!empty($criteria->department)) {
+     if(!empty($criteria['department'])) {
          $qb
              ->andWhere('r.department = :department')
-             ->setParameter('department', $criteria->department)
+             ->setParameter('department', $criteria['department'])
          ;
      }
 
@@ -79,6 +80,7 @@ public function search($criteria)
 
     return $qb->getQuery();
 }
+
 
 //    public function findOneBySomeField($value): ?Job
 //    {

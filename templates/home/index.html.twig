@@ -12,47 +12,13 @@
 			</form>
 		</div>
 		{{form_start(formSort)}}
+		<pre>
+		</pre>
 		<div class="btn-group d-flex justify-content-around m-3">
-
-			{{form_widget(formSort.type)}}
-			{{ form_widget(formSort.department)}}
-			{# <button type="button" class="btn btn-primary dropdown-toggle mx-2" data-bs-toggle="dropdown" aria-expanded="false">
-			Type de contrat
+			<button type="submit" class="btn btn-primary mx-2 py-0 px-1 rounded">{{form_widget(formSort.type)}}</button>
+			<button type="submit" class="btn btn-primary mx-2 py-0 px-1 rounded">{{ form_widget(formSort.department)}}</button>
+			<button type="button" class="dateSort btn btn-white text-white border-primary rounded mx-2" > {{ knp_pagination_sortable(jobs, 'Date', 'r.sendAt') }}
 			</button>
-			<ul class="dropdown-menu">
-				<li>
-					<a class="dropdown-item" href="#">CDI</a>
-				</li>
-				<li>
-					<a class="dropdown-item" href="#">CDD</a>
-				</li>
-				<li>
-					<a class="dropdown-item" href="#">Intérime</a>
-				</li>
-				<li>
-					<a class="dropdown-item" href="#">Alternance</a>
-				</li>
-				<li>
-					<a class="dropdown-item" href="#">Stage</a>
-				</li>
-			</ul> #}
-
-			{# <button type="button" class="btn btn-primary dropdown-toggle mx-2 rounded" data-bs-toggle="dropdown" aria-expanded="false">
-				Département
-			</button>
-			<ul class="dropdown-menu overflow-auto" style="height:200px;">
-				<input class="form-control" id="myInput" type="text" placeholder="Search..">
-				{% for i in 0..100 %}
-					<li>
-						<a class="dropdown-item" href="#">Nom dpt -
-							{{i}}</a>
-					</li>
-				{% endfor %}
-			</ul> #}
-
-			<button type="button" class="dateSort btn btn-white text-primary border-primary rounded mx-2" href="">{{ knp_pagination_sortable(jobs, 'Date', 'r.sendAt') }}
-			</button>
-
 		</div>
 		{{form_end(formSort)}}
 
@@ -95,26 +61,32 @@
 
 	<script>
 		const searchBar = document.querySelector('.form-control')
-const jobsOffer = document.querySelectorAll('.jobOffer')
+		const jobsOffer = document.querySelectorAll('.jobOffer')
 
-searchBar.addEventListener('keyup', (e) => {
-let getValue = searchBar.value.trim().toLowerCase();
+		searchBar.addEventListener('keyup', (e) => {
+		let getValue = searchBar.value.trim().toLowerCase();
 
-if (getValue.length > 0) {
+			if (getValue.length > 0) {
 
-jobsOffer.forEach(function (card) {
-if (card.querySelector('h5').textContent.includes(getValue)) {
-card.style.display = "flex"
-} else {
-card.style.display = "none"
-}
-})
-}
-})
+				jobsOffer.forEach(function (card) {
+					if (card.querySelector('h5').textContent.includes(getValue)) {
+					card.style.display = "flex"
+					} else {
+					card.style.display = "none"
+					}
+				})
+			}
+		})
 
-	const inputContrat = document.getElementById('job_sort_type');
-	inputContrat.addEventListener('change', function() {
-		document.querySelector('[name="job_sort"]').submit();
-	})
+		const inputContrat = document.getElementById('job_sort_type');
+		const inputDpt = document.getElementById('job_sort_department');
+
+		inputContrat.addEventListener('change', function () {
+		document.querySelector('[name="job_sort[type]"]').submit();
+		})
+
+		inputDpt.addEventListener('change', function () {
+		document.querySelector('[name="job_sort[department]"]').submit();
+		})
 	</script>
 {% endblock %}
