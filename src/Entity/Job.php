@@ -43,10 +43,10 @@ class Job
     #[ORM\Column(length: 255)]
     private ?string $duration = null;
 
-    #[ORM\OneToMany(mappedBy: 'job_id', targetEntity: Apply::class)]
+    #[ORM\OneToMany(mappedBy: 'job_id', targetEntity: Apply::class, orphanRemoval: true)]
     private Collection $applies;
 
-    #[ORM\OneToMany(mappedBy: 'job_id', targetEntity: Apply::class)]
+    #[ORM\OneToMany(mappedBy: 'job_id', targetEntity: Apply::class, orphanRemoval: true)]
     private Collection $appliesJob;
 
     public function __construct()

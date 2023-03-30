@@ -17,7 +17,7 @@ class Apply1Type extends AbstractType
             ->add('email')
             ->add('message')
             ->add('sendAt')
-            ->add('user_id')
+            // ->add('user_id')
             ->add('job_id')
         ;
     }

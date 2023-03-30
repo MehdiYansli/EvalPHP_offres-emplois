@@ -1,13 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin_form.html.twig' %}
+{% set cancel_route = "app_admin_job_index" %}
+{% set title = "Editer l'offre d'emploi" %}
 
-{% block title %}Edit Job{% endblock %}
 
-{% block body %}
-    <h1>Edit Job</h1>
-
-    {{ include('admin/job/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_admin_job_index') }}">back to list</a>
-
+{% block form %}
+   
     {{ include('admin/job/_delete_form.html.twig') }}
+    {{ include('admin/job/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
 {% endblock %}

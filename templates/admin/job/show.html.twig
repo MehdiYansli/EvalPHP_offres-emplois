@@ -1,26 +1,25 @@
-{% extends 'base.html.twig' %}
+{% set title = "Offre sélectionnée" %}
+{% extends 'admin_table.html.twig' %}
 
-{% block title %}Job{% endblock %}
 
-{% block body %}
-    <h1>Job</h1>
-
-    <table class="table">
+{% block table_content %}
+        <a href="{{ path('app_admin_job_edit', {'id': job.id}) }}" class="btn btn-primary my-2 "><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></a>
+        {{ include('admin/job/_delete_form.html.twig') }}
         <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ job.id }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Intitulé du poste</th>
                 <td>{{ job.title }}</td>
             </tr>
             <tr>
-                <th>Department</th>
+                <th>Département</th>
                 <td>{{ job.department }}</td>
             </tr>
             <tr>
-                <th>City</th>
+                <th>Ville</th>
                 <td>{{ job.city }}</td>
             </tr>
             <tr>
@@ -28,31 +27,26 @@
                 <td>{{ job.description }}</td>
             </tr>
             <tr>
-                <th>SendAt</th>
+                <th>Posté le</th>
                 <td>{{ job.sendAt ? job.sendAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>EndDate</th>
-                <td>{{ job.endDate ? job.endDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Salary</th>
+                <th>Salaire</th>
                 <td>{{ job.salary }}</td>
             </tr>
             <tr>
-                <th>Type</th>
+                <th>Type de contrat</th>
                 <td>{{ job.type }}</td>
             </tr>
             <tr>
-                <th>Duration</th>
+                <th>Durée</th>
                 <td>{{ job.duration }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_job_index') }}">back to list</a>
+        
+        <a href="{{ path('app_admin_job_index') }}" class="btn btn-primary my-2">Retour</a>
+    
 
-    <a href="{{ path('app_admin_job_edit', {'id': job.id}) }}">edit</a>
-
-    {{ include('admin/job/_delete_form.html.twig') }}
 {% endblock %}

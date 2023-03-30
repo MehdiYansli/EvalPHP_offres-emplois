@@ -1,11 +1,8 @@
-{% extends 'base.html.twig' %}
+{% set title = "Liste des candidatures" %}
+{% extends 'admin_table.html.twig' %}
 
-{% block title %}Apply index{% endblock %}
 
-{% block body %}
-    <h1>Apply index</h1>
-
-    <table class="table">
+{% block table_content %}
         <thead>
             <tr>
                 <th>Id</th>
@@ -13,8 +10,8 @@
                 <th>LastName</th>
                 <th>Email</th>
                 <th>Message</th>
-                <th>SendAt</th>
-                <th>actions</th>
+                <th>Envoyée le</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -25,10 +22,9 @@
                 <td>{{ apply.lastName }}</td>
                 <td>{{ apply.email }}</td>
                 <td>{{ apply.message }}</td>
-                <td>{{ apply.sendAt ? apply.sendAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ apply.sendAt ? apply.sendAt|date('d/m/Y') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_admin_apply_show', {'id': apply.id}) }}">show</a>
-                    <a href="{{ path('app_admin_apply_edit', {'id': apply.id}) }}">edit</a>
+                    <a href="{{ path('app_admin_apply_show', {'id': apply.id}) }}" class="btn btn-primary"><i class="fa-regular fa-eye" style="color: #ffffff;"></i></a>
                 </td>
             </tr>
         {% else %}
@@ -38,6 +34,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_admin_apply_new') }}">Create new</a>
 {% endblock %}

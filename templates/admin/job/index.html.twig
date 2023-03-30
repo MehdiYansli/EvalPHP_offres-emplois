@@ -1,24 +1,23 @@
-{% extends 'base.html.twig' %}
+{% set title = "Liste des offres d'emplois" %}
+{% extends 'admin_table.html.twig' %}
 
-{% block title %}Job index{% endblock %}
+{% block actions %}
+    <a href="{{ path('app_admin_job_new') }}" class="btn btn-primary"><i class="fa-solid fa-plus mx-1" style="color: #ffffff;"></i>Ajouter une offre</a>
+{% endblock %}
 
-{% block body %}
-    <h1>Job index</h1>
-
-    <table class="table">
-        <thead>
+{% block table_content %}
+<thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
-                <th>Department</th>
-                <th>City</th>
+                <th>Titre de l'annonce</th>
+                <th>Département</th>
+                <th>Ville</th>
                 <th>Description</th>
-                <th>SendAt</th>
-                <th>EndDate</th>
-                <th>Salary</th>
-                <th>Type</th>
-                <th>Duration</th>
-                <th>actions</th>
+                <th>Posté le</th>
+                <th>Salaire</th>
+                <th>Type de contrat</th>
+                <th>Durée</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -29,14 +28,13 @@
                 <td>{{ job.department }}</td>
                 <td>{{ job.city }}</td>
                 <td>{{ job.description }}</td>
-                <td>{{ job.sendAt ? job.sendAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ job.endDate ? job.endDate|date('Y-m-d') : '' }}</td>
+                <td>{{ job.sendAt ? job.sendAt|date('d/m/Y') : '' }}</td>
                 <td>{{ job.salary }}</td>
                 <td>{{ job.type }}</td>
                 <td>{{ job.duration }}</td>
                 <td>
-                    <a href="{{ path('app_admin_job_show', {'id': job.id}) }}">show</a>
-                    <a href="{{ path('app_admin_job_edit', {'id': job.id}) }}">edit</a>
+                    <a href="{{ path('app_admin_job_show', {'id': job.id}) }}" class="btn btn-primary m-1"><i class="fa-regular fa-eye" style="color: #ffffff;"></i></a>
+                    <a href="{{ path('app_admin_job_edit', {'id': job.id}) }}" class="btn btn-primary m-1"><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></a>
                 </td>
             </tr>
         {% else %}
@@ -45,7 +43,5 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+{% endblock %}        
 
-    <a href="{{ path('app_admin_job_new') }}">Create new</a>
-{% endblock %}
