@@ -14,7 +14,7 @@
 		{{form_start(formSort)}}
 		<pre>
 		</pre>
-		<div class="btn-group d-flex justify-content-around m-3">
+		<div class="btn-group d-flex justify-content-around my-5">
 			<button type="submit" class="btn btn-primary mx-2 py-0 px-1 rounded">{{form_widget(formSort.type)}}</button>
 			<button type="submit" class="btn btn-primary mx-2 py-0 px-1 rounded">{{ form_widget(formSort.department)}}</button>
 			<button type="button" class="dateSort btn btn-white text-white border-primary rounded mx-2" > <span class="text-primary me-2">Date</span>{{ knp_pagination_sortable(jobs, '', 'r.sendAt') }}
@@ -28,7 +28,7 @@
 			<div class="jobOffer card w-75 my-4">
 				<div class="card-body d-flex align-items-center">
 					<div class="card_body_image mx-5">
-						<img width="100" src="https://img.freepik.com/free-vector/men-success-laptop-relieve-work-from-home-computer-great_10045-646.jpg?w=740&t=st=1680258487~exp=1680259087~hmac=7b41f58fd55c699d72aa92d8d15ef0aab3ba9d97d320a161384673a388f08c02" alt="">
+						<img width="100" src="{{ asset('images/work_logo.png')}}" alt="">
 					</div>
 					<div class="card_body_text w-100">
 						<h5 class="card-title">{{ job.title }}</h5>
