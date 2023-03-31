@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin board
+{% endblock %}
+
+{% block body %}
+
+	<section class="container">
+    <h3 class="text-secondary text-center my-4">Tableau de bord administrateur</h3>
+		<div class="d-grid gap-2 my-3">
+			<a class="btn btn-primary my-4" type="button" href="{{ path('app_admin_job_index')}}">Gérer les offres d'emplois</a>
+			<a class="btn btn-primary my-4" type="button" href="{{ path('app_admin_apply_index')}}">Gérer les candidatures</a>
+		</div>
+	</section>
+
+{% endblock %}
