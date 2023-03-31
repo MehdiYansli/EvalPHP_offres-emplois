@@ -31,8 +31,15 @@
 				</div>
 
 				<div class="col-md-3 text-end">
-					<a type="button" class="btn btn-outline-primary me-2" href="{{ path('app_login')}}">Connexion</a>
 					<a type="button" class="btn btn-primary" href="{{ path('app_register')}}">Inscription</a>
+					{% if app.user %}
+
+						<a type="button" class="btn btn-outline-primary me-2" href="{{ path('app_logout') }}">Déconnexion</a>
+
+					{% else %}
+						<a type="button" class="btn btn-outline-primary me-2" href="{{ path('app_login')}}">Connexion</a>
+					{% endif %}
+					
 				</div>
 			</header>
 		</div>

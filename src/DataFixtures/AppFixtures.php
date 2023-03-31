@@ -22,15 +22,15 @@ class AppFixtures extends Fixture
 
 
         $users = [];
-        for ($i = 0; $i < 1; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $user = new User;
             $user
-                ->setEmail('test@mail.com')
+                ->setEmail($faker->safeEmail())
                 ->setFirstName($faker->firstName())
                 ->setLastName($faker->lastName())
                 ->setUsername($faker->firstName() . '_' . $faker->lastName())
-                ->setPassword('password')
-                ->setRoles(['ROLE_ADMIN']);
+                ->setPassword($faker->sha256())
+                ->setRoles(['ROLE_USER']);
 
             $manager->persist($user);
             $users[] = $user;
