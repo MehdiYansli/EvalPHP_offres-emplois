@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class JobType extends AbstractType
+class JobAdminType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

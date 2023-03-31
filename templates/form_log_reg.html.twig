@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block body %}
+	<div class="container p-5">
+
+    <div class="card shadow-lg bg-light">
+        <div class="card-body p-0">
+            {% block delete_form %}{% endblock %}
+            <h3 class="card-title bg-primary text-white p-3">{{ title }}</h3>
+            <div class="p-3 form-group">
+                {% block form %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+</div>
+    
+{% endblock %}

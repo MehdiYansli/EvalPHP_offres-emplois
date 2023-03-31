@@ -79,8 +79,10 @@ public function search($criteria)
         }
     
         $qb
+        // tri par ordre croissant
            ->orderBy('r.sendAt', 'DESC')
 
+        // affichage des offres dont la date de fin n'est pas encore dépassée 
            ->andWhere('r.endDate > :endDate')
            ->setParameter('endDate', $dateNow);
     
